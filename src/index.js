@@ -23,17 +23,17 @@ const server = net.createServer(function(socket) {
           case 'ece.lookup': {
             console.log('this is ece.lookup subtype')
             try {
-              // const response = await axios.post('https://jsonplaceholder.typicode.com/posts/1')
+              const response = await axios.get('https://jsonplaceholder.typicode.com/posts/1')
               // console.log(response)
-              await sleep(1700)
-              const response = {
-                data: {
-                  confirmation: "1234ABCD"
-                }
-              }
-              const confirmation = response.data.confirmation
+              // await sleep(1300)
+              // const response = {
+              //   data: {
+              //     userId: "1234ABCD"
+              //   }
+              // }
+              const confirmation = response.data.userId
               return {
-                VAR10_TAG: confirmation
+                VAR10_TAG: String(confirmation)
               }
             } catch (e) {
               return {
