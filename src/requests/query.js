@@ -1,6 +1,6 @@
 const queryResponse = require('src/responses/query')
-const parseEcvVars = require('src/parse/ecv')
-const errors = require('src/errors')
+const parseCallVars = require('src/parse/ecv')
+const errors = require('src/status-codes')
 const testData = require('../../test/tags.js')
 
 module.exports = async function (socket, data, callback) {
@@ -38,8 +38,8 @@ module.exports = async function (socket, data, callback) {
     callData.noScriptReply = true
   }
 
-  callData.ecvVars = parseEcvVars(data.slice(i))
-  console.log('callData =', callData)
+  callData.callVars = parseCallVars(data.slice(i))
+  // console.log('callData =', callData)
 
   let processedData
   if (callData.duplicateRequest) {
@@ -49,17 +49,25 @@ module.exports = async function (socket, data, callback) {
     try {
       // run callback and await the results
       processedData = await callback(callData)
-      // processedData = testData
+      console.log('callback done. response: ', processedData)
     } catch (e) {
+      let statusMessage = ''
+      if (typeof e === 'string') {
+        statusMessage = e
+      } else if (typeof e.statusMessage === 'string') {
+        statusMessage = e.statusMessage
+      } else if (typeof e.status === 'string') {
+        statusMessage = e.status
+      }
       // return failure response
-      socket.write(failResponse(callData.invokeId, statusCode, statusMessage))
+      socket.write(failResponse(callData.invokeId, errors.indexOf('E_AG_HOST_ERROR2'), statusMessage))
     }
   }
   if (callData.noScriptReply) {
     // response with no attached call variables in reply (ACK)
-    socket.write(queryResponse(callData.invokeId, errors.none))
+    socket.write(queryResponse(callData.invokeId, errors.indexOf('E_AG_NO_ERROR')))
   } else {
     // response with call data returned
-    socket.write(queryResponse(callData.invokeId, errors.none, processedData))
+    socket.write(queryResponse(callData.invokeId, errors.indexOf('E_AG_NO_ERROR'), processedData))
   }
 }

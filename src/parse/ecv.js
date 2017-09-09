@@ -2,7 +2,7 @@ const tagTypes = require('src/tag-types')
 
 module.exports = function (data) {
   let i = 0
-  const ecvVars = {
+  const callVars = {
     EXPANDED_CALL_VARIABLE_TAG: {},
     EXPANDED_CALL_ARRAY_TAG: []
   }
@@ -46,7 +46,7 @@ module.exports = function (data) {
           // console.log(`${ecvName} = ${ecvValue}`)
           // write to main data store object for this request
           // and trim the null (0x00) characters out of the buffer
-          ecvVars.EXPANDED_CALL_VARIABLE_TAG[ecvName.toString('ascii', 0, j)] = ecvValue.toString('ascii', 0, k)
+          callVars.EXPANDED_CALL_VARIABLE_TAG[ecvName.toString('ascii', 0, j)] = ecvValue.toString('ascii', 0, k)
         }
         break
       }
@@ -78,7 +78,7 @@ module.exports = function (data) {
           // get next char
           letter = data.readUInt8(i++)
         }
-        ecvVars.EXPANDED_CALL_ARRAY_TAG.push({
+        callVars.EXPANDED_CALL_ARRAY_TAG.push({
           index: ecvIndex,
           name: ecvName.toString('ascii', 0, j),
           value: ecvValue.toString('ascii', 0, k)
@@ -88,11 +88,11 @@ module.exports = function (data) {
       default: {
         const fieldData = data.toString('ascii', i, i + fieldLength)
         // console.log(`${tagType} = ${fieldData}`)
-        ecvVars[tagType] = fieldData
+        callVars[tagType] = fieldData
         // increment cursor
         i += fieldLength
       } // end default case
     } // end switch
   } // end while
-  return ecvVars
+  return callVars
 }
