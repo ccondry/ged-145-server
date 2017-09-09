@@ -1,10 +1,10 @@
 const messageTypes = require('src/message-types')
-const errors = require('src/errors')
+const errors = require('src/status-codes')
 const tagTypes = require('src/tag-types')
 
 const type = 'QUERY_RESP'
 
-module.exports = function (invokeId, error, tags) {
+module.exports = function (invokeId, reject, tags) {
   // console.log(`creating ${type} message`)
 
   // max tags data size should be less than 2500, the max total bytes for CTI Server
@@ -98,7 +98,7 @@ module.exports = function (invokeId, error, tags) {
   const trimTagsBuffer = tagsBuffer.slice(0, n)
   // console.log('trimTagsBuffer', trimTagsBuffer)
 
-  // data size = 16 bytes for header, invokeId, and error
+  // data size = 16 bytes for header, invokeId, and reject
   // plus the size of the attached variables, if any
   const data = Buffer(16 + trimTagsBuffer.length)
 
@@ -118,17 +118,17 @@ module.exports = function (invokeId, error, tags) {
   data.writeUInt32BE(invokeId, i)
   i += 4
 
-  if (error) {
+  if (reject) {
     try {
-      // write given error
-      data.writeUInt32BE(error, i)
+      // write given reject reason
+      data.writeUInt32BE(reject, i)
     } catch (e) {
-      // write unespecified error
-      data.writeUInt32BE(errors.unspecified, i)
+      // write unspecified error
+      data.writeUInt32BE(errors.indexOf('E_AG_HOST_ERROR1'), i)
     }
   } else {
     // write no error
-    data.writeUInt32BE(errors.none, i)
+    data.writeUInt32BE(errors.indexOf('E_AG_NO_ERROR'), i)
   }
   i += 4
 
