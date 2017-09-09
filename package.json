@@ -1,0 +1,24 @@
+{
+  "name": "ged-145-server",
+  "version": "0.1.0",
+  "description": "Cisco GED-145 library for Contact Center Enterprise ICM Application Gateway",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "test": "mocha --spec reporter",
+    "postinstall": "node -e \"var s='../src',d='node_modules/src',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\""
+  },
+  "keywords": [
+    "cisco",
+    "cce",
+    "ucce",
+    "pcce",
+    "icm",
+    "application",
+    "gateway",
+    "ged145",
+    "ged-145"
+  ],
+  "author": "Coty Condry <ccondry@cisco.com>",
+  "license": "ISC"
+}
