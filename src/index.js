@@ -1,7 +1,6 @@
 const net = require('net')
 const Ged145Request = require('./ged-145-request')
 const messageHandlers = require('./message-handlers')
-const axios = require('axios')
 
 module.exports = class {
 
