@@ -2,6 +2,17 @@ const queryResponse = require('src/responses/query')
 const parseCallVars = require('src/parse/ecv')
 const errors = require('src/status-codes')
 const testData = require('../../test/tags.js')
+const failResponse = require('src/responses/fail')
+
+const extractError = function (e) {
+  if (typeof e === 'string') {
+    return e
+  } else if (typeof e.statusMessage === 'string') {
+    return e.statusMessage
+  } else if (typeof e.status === 'string') {
+    return e.status
+  }
+}
 
 module.exports = async function (socket, data, callback) {
   const callData = {}
@@ -49,18 +60,10 @@ module.exports = async function (socket, data, callback) {
     try {
       // run callback and await the results
       processedData = await callback(callData)
-      console.log('callback done. response: ', processedData)
+      console.log('finished processing query data. processedData =', processedData)
     } catch (e) {
-      let statusMessage = ''
-      if (typeof e === 'string') {
-        statusMessage = e
-      } else if (typeof e.statusMessage === 'string') {
-        statusMessage = e.statusMessage
-      } else if (typeof e.status === 'string') {
-        statusMessage = e.status
-      }
       // return failure response
-      socket.write(failResponse(callData.invokeId, errors.indexOf('E_AG_HOST_ERROR2'), statusMessage))
+      socket.write(failResponse(callData.invokeId, errors.indexOf('E_AG_HOST_ERROR2'), extractError(e)))
     }
   }
   if (callData.noScriptReply) {
