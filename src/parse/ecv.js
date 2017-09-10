@@ -1,4 +1,4 @@
-const tagTypes = require('src/tag-types')
+const tagTypes = require('../tag-types')
 
 module.exports = function (data) {
   let i = 0

@@ -1,8 +1,7 @@
-const queryResponse = require('src/responses/query')
-const parseCallVars = require('src/parse/ecv')
-const errors = require('src/status-codes')
-const testData = require('../../test/tags.js')
-const failResponse = require('src/responses/fail')
+const queryResponse = require('../responses/query')
+const parseCallVars = require('../parse/ecv')
+const errors = require('../status-codes')
+const failResponse = require('../responses/fail')
 
 const extractError = function (e) {
   if (typeof e === 'string') {

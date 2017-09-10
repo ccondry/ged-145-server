@@ -1,4 +1,4 @@
-const response = require('src/responses/close')
+const response = require('../responses/close')
 
 module.exports = function (socket, data) {
   // An ID for this message, which should be included in the response.

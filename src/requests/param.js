@@ -1,4 +1,4 @@
-const response = require('src/responses/param')
+const response = require('../responses/param')
 
 module.exports = function (socket, data) {
   // buffer cursor

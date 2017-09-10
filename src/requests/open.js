@@ -1,4 +1,4 @@
-const openConfirmation = require('src/responses/open-confirmation')
+const openConfirmation = require('../responses/open-confirmation')
 
 module.exports = function (socket, data) {
   let i = 0
