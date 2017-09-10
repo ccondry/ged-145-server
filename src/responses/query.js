@@ -1,6 +1,6 @@
-const messageTypes = require('src/message-types')
-const errors = require('src/status-codes')
-const tagTypes = require('src/tag-types')
+const messageTypes = require('../message-types')
+const errors = require('../status-codes')
+const tagTypes = require('../tag-types')
 
 const type = 'QUERY_RESP'
 

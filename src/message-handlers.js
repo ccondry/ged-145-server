@@ -1,7 +1,7 @@
 module.exports = {
-  CLOSE_REQ: require('src/requests/close'),
-  HEARTBEAT_REQ: require('src/requests/heartbeat'),
-  OPEN_REQ: require('src/requests/open'),
-  PARAM_REQ: require('src/requests/param'),
-  QUERY_REQ: require('src/requests/query')
+  CLOSE_REQ: require('./requests/close'),
+  HEARTBEAT_REQ: require('./requests/heartbeat'),
+  OPEN_REQ: require('./requests/open'),
+  PARAM_REQ: require('./requests/param'),
+  QUERY_REQ: require('./requests/query')
 }

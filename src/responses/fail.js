@@ -1,6 +1,6 @@
-const messageTypes = require('src/message-types')
-const statusCodes = require('src/status-codes')
-const tagTypes = require('src/tag-types')
+const messageTypes = require('../message-types')
+const statusCodes = require('../status-codes')
+const tagTypes = require('../tag-types')
 
 const type = 'FAILURE_CONF'
 

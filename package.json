@@ -4,9 +4,7 @@
   "description": "Cisco GED-145 library for Contact Center Enterprise ICM Application Gateway",
   "main": "src/index.js",
   "scripts": {
-    "start": "NODE_TLS_REJECT_UNAUTHORIZED=0 node src/index.js",
-    "test": "mocha --spec reporter",
-    "postinstall": "node -e \"var s='../src',d='node_modules/src',fs=require('fs');fs.exists(d,function(e){e||fs.symlinkSync(s,d,'dir')});\""
+    "test": "mocha --spec reporter"
   },
   "keywords": [
     "cisco",

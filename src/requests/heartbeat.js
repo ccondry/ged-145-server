@@ -1,4 +1,4 @@
-const heartbeatResponse = require('src/responses/heartbeat')
+const heartbeatResponse = require('../responses/heartbeat')
 
 module.exports = function (socket, data) {
   // An ID for this message, which should be included in the response.

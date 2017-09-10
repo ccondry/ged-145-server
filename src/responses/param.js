@@ -1,4 +1,4 @@
-const messageTypes = require('src/message-types')
+const messageTypes = require('../message-types')
 
 const type = 'PARAM_CONF'
 
