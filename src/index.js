@@ -21,9 +21,23 @@ module.exports = class {
             // callback run during QUERY_REQ
             // console.log('callData received: ', callData)
             // try to run registered subtype callback
-            return await this.subtypes[callData.callVars.SUBTYPE_TAG].callback(callData)
+            const subtypeName = callData.callVars.SUBTYPE_TAG
+            const subtype = this.subtypes[subtypeName]
+            if (subtype) {
+              // matching subtype found
+              return await subtype.callback(callData)
+            } else {
+              // no matching subtype registered
+              console.log('unmatched subtype ' + subtypeName)
+              // try to return the error in common fields
+              return {
+                CDPD_TAG: 'Error unknown subtype'
+                VAR10_TAG: 'Error unknown subtype'
+              }
+            }
           })
         } catch (e) {
+          // unkown message type?
           console.log(e)
           console.log('req.messageType', req.messageType)
           // continue
@@ -37,6 +51,7 @@ module.exports = class {
     this.server.listen(this.port, this.address)
   }
 
+  // register a callback for subtype name
   on (subtype, callback) {
     this.subtypes[subtype] = {
       callback

@@ -29,3 +29,10 @@ ged.on('test.reply', async function(callData) {
 
 ged.start()
 ```
+
+### Not Yet Implemented
+Encryption and failover have not been implemented yet. 
+
+### References
+CISCO ICM Application Gateway Interface document:
+https://developer.cisco.com/fileMedia/download/3b38c422-0de9-4185-a8dc-023278aab3db
