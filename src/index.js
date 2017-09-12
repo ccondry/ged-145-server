@@ -31,7 +31,7 @@ module.exports = class {
               console.log('unmatched subtype ' + subtypeName)
               // try to return the error in common fields
               return {
-                CDPD_TAG: 'Error unknown subtype'
+                CDPD_TAG: 'Error unknown subtype',
                 VAR10_TAG: 'Error unknown subtype'
               }
             }
