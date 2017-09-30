@@ -10,6 +10,12 @@ module.exports = class {
     this.subtypes = {}
 
     const server = net.createServer(socket => {
+      // handle ECONNRESET
+      socket.on("error", error => {
+        console.log(`Connection reset by ${socket.remoteAddress}:${socket.remotePort}`)
+        console.log(error.stack)
+      })
+
       console.log('connection received from ' + socket.remoteAddress + ":" + socket.remotePort)
       socket.on('data', data => {
         // console.log('requestData hex:', data.toString('hex'))
