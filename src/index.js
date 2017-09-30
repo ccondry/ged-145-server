@@ -13,7 +13,7 @@ module.exports = class {
       // handle ECONNRESET
       socket.on("error", error => {
         console.log(`Connection reset by ${socket.remoteAddress}:${socket.remotePort}`)
-        console.log(error.stack)
+        // console.log(error.stack)
       })
 
       console.log('connection received from ' + socket.remoteAddress + ":" + socket.remotePort)
