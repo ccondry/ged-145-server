@@ -1,4 +1,5 @@
 module.exports = {
+  CLID_TAG: '5551112222', // Caller ID
   CDPD_TAG: '1234', // Caller Provided Digits
   VAR1_TAG: '4085267209', // Peripheral Variable 1
   VAR2_TAG: 'jane smith', // Peripheral Variable 2
