@@ -23,7 +23,7 @@ module.exports = class {
         const req = new Ged145Request(data)
         const messageHandler = messageHandlers[req.messageType]
         try {
-          messageHandler(socket, req.messageBody, async callData => {
+          messageHandler(socket, req.messageBody, callData => {
             // callback run during QUERY_REQ
             // console.log('callData received: ', callData)
             // try to run registered subtype callback
@@ -31,7 +31,25 @@ module.exports = class {
             const subtype = this.subtypes[subtypeName]
             if (subtype) {
               // matching subtype found
-              return await subtype.callback(callData)
+              try {
+                return subtype.callback(callData)
+              } catch (e) {
+                // failed to run registered callback
+                console.error('ged-145-server encountered exception trying to run registered callback for subtype ' + subtype, e)
+                try {
+                  console.log('Returning error in CDPD_TAG')
+                  return {
+                    CDPD_TAG: 'Error - ' + e.toString()
+                  }
+                } catch (e2) {
+                  console.log('failed to process error into string.')
+                  console.log('Returning unknown error in CDPD_TAG.')
+                  return {
+                    CDPD_TAG: 'Error - unknown exception'
+                  }
+                }
+
+              }
             } else {
               // no matching subtype registered
               console.log('unmatched subtype ' + subtypeName)
