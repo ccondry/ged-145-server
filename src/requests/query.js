@@ -59,7 +59,7 @@ module.exports = async function (socket, data, callback) {
     try {
       // run callback and await the results
       processedData = await callback(callData)
-      console.log('finished processing query data. processedData =', processedData)
+      // console.log('finished processing query data. processedData =', processedData)
     } catch (e) {
       // return failure response
       socket.write(failResponse(callData.invokeId, errors.indexOf('E_AG_HOST_ERROR2'), extractError(e)))

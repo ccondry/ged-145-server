@@ -1,5 +1,10 @@
 module.exports = {
-  CDPD_TAG: '1234', // Caller Provided Digits
+  SUBTYPE_TAG: 'demo.selector.voice', // the subtype specified in ICM script
+  CED_TAG: '0', // Caller Entered Digits
+  ROUTING_CLIENT_TAG: 'CVP_PG_1A', // Routing Client ID
+  DN_STRING_TAG: '7703', // Dialed Number String
+  CLID_TAG: '5551112222', // Caller ID
+  CDPD_TAG: '1234', // Customer Provided Digits
   VAR1_TAG: '4085267209', // Peripheral Variable 1
   VAR2_TAG: 'jane smith', // Peripheral Variable 2
   VAR3_TAG: 'sales_east', // Peripheral Variable 3
