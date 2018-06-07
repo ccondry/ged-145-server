@@ -1,6 +1,6 @@
 {
   "name": "ged-145-server",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Cisco GED-145 library for Contact Center Enterprise ICM Application Gateway",
   "main": "src/index.js",
   "scripts": {
