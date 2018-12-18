@@ -13,7 +13,8 @@ module.exports = function (invokeId, reject, tags) {
   if (tags) {
     // write each tag to the buffer
     for (const key of Object.keys(tags)) {
-      const value = tags[key]
+      // make sure value is not undefined
+      const value = tags[key] || ''
       const tagType = tagTypes.indexOf(key)
       if (tagType < 0) {
         // invalid or unrecognized tag type
